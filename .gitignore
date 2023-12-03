@@ -9,6 +9,7 @@
 .idea/
 
 # Dependencies
+bpm-modules/
 node_modules/
 vendor/
 

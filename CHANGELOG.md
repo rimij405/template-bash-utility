@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning].
 
 - `.gitignore`
 - `CHANGELOG.md`
+- `CODEOWNERS`
+- List of contributors.
 
 <!-- ### Changed -->
 

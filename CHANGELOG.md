@@ -12,10 +12,13 @@ and this project adheres to [Semantic Versioning].
 - `.gitignore`
 - `CHANGELOG.md`
 - `CODEOWNERS`
-- List of contributors.
-- Code of conduct and guide for contributors.
+- list of contributors
+- code of conduct and guide for contributors
 
-<!-- ### Changed -->
+### Changed
+
+- changed LICENSE ([MIT] => [MIT-0]).
+- updated `README.md`
 
 <!-- ### Deprecated -->
 
@@ -32,6 +35,8 @@ and this project adheres to [Semantic Versioning].
 <!-- Links -->
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
+[mit]: https://spdx.org/licenses/MIT.html
+[mit-0]: https://spdx.org/licenses/MIT-0.html
 
 <!-- Versions -->
 [unreleased]: https://github.com/Author/Repository/compare/v0.0.1...HEAD

@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+set -eu
+set -o pipefail
+
+# ============================================================================ #
+# install-bpm
+#
+# Copyright (C) 2023 Ian Effendi. All rights reserved.
+# Released under the MIT License.
+# https://spdx.org/licenses/MIT.html
+#
+# Author: @rimij405 (Ian Effendi)
+# https://github.com/rimij405
+#
+# bpm is a simple bash package manager creaed by Tyler Akins (@fidian).
+# This script will install `bpm` into the $HOME/.local/bin folder.
+# ============================================================================ #
+
+# ========================================
+# SCRIPT METADATA
+# ========================================
+__PROGRAM_NAME="Install BPM"
+__PROGRAM_CMD="install-bpm"
+__PROGRAM_VERSION="1.0.0"
+__PROGRAM_DATE="2023-12-03"
+__COPYRIGHT="
+Copyright (C) 2023 Ian Effendi
+License MIT <https://spdx.org/licenses/MIT.html>
+
+This is free software; you are free to change and distribute it.
+There is NO WARRANTY, to the extent permitted by law.
+"
+
+# ========================================
+# CONSTANTS
+# ========================================
+
+# ========================================
+# INTERNAL VARIABLES
+# ========================================
+
+# Conditionals.
+__PRINT_HELP=false
+__PRINT_VERSION=false
+__INSTALL_PACKAGES=false
+
+# Download URI and destination.
+__BPM_URI="https://raw.githubusercontent.com/bpm-rocks/bpm/master/bpm"
+__BPM_PATH="$HOME/.local/bin/bpm"
+
+# ========================================
+# HELPER FUNCTIONS
+# ========================================
+
+# Send copyright information to stdout.
+function _copyright() {
+    printf "${__COPYRIGHT}"
+}
+
+# Send version information to stdout.
+function _version() {
+    printf "%s, version %s%s\n" \
+        "${__PROGRAM_NAME}" \
+        "${__PROGRAM_VERSION}" \
+        "$(_copyright)"
+}
+
+# Send usage information to stdout.
+function _usage() {
+    printf "Usage: ${__PROGRAM_CMD} [OPTIONS] [--help] [--version]
+    $(_version | head -1)
+    
+    Arguments:
+        -h, --help              Display this help text.
+        -v, --version           Display script version and build information.
+        -i, --install-pkgs      Runs 'bpm install' after bpm is downloaded.
+
+    This script will install bpm, a bash package manager.
+    "
+}
+
+# ========================================
+# SERVICE FUNCTIONS
+# ========================================
+
+# Send message to STDERR and exit with an error.
+# 
+# Args:
+#   message: string     The error message to display.
+function die() {
+    echo "$*" >&2
+    exit 2
+}
+
+# Send help text to stdout and then exit.
+function help() {
+    printf "%s\n" "$(_usage)"
+    exit 0
+}
+
+# Download the package and assign it the correct permissions.
+function download() {
+    echo "Downloading bpm script file..."
+    curl -sSOL "${__BPM_URI}"
+    chmod a+x bpm
+    mv bpm $(dirname "${__BPM_PATH}")
+}
+
+# ========================================
+# ARGUMENT HANDLING
+# ========================================
+
+# Loop through the short options. Long options are processed by `-`.
+while getopts hvi-: OPT; do
+    # support long options: https://stackoverflow.com/a/28466267/519360
+    if [ "$OPT" = "-" ]; then   # long option: reformulate OPT and OPTARG
+        OPT="${OPTARG%%=*}"       # extract long option name
+        OPTARG="${OPTARG#$OPT}"   # extract long option argument (may be empty)
+        OPTARG="${OPTARG#=}"      # if long option argument, remove assigning `=`
+    fi
+    # process options.
+    case "$OPT" in
+        h | help )
+            __PRINT_HELP=true ;;
+        v | version )
+            __PRINT_VERSION=true ;;
+        i | install-pkgs)
+            __INSTALL_PACKAGES=true ;;
+        \? )
+            # bad short option (error reported via getopts)
+            exit 2 ;;  
+        * )            
+            # bad long option
+            die "Illegal option --$OPT" ;;         
+    esac
+done
+
+# remove parsed options and args from $@ list
+shift $((OPTIND-1))
+
+# ========================================
+# HELP & VERSION INFORMATION
+# ========================================
+
+# If printing help, do so and exit.
+if [[ ${__PRINT_HELP} == "true" ]]; then
+    help
+    exit 0
+fi
+
+# If printing version, do so and exit.
+if [[ ${__PRINT_VERSION} == "true" ]]; then
+    _version
+    exit 0
+fi
+
+# ========================================
+# PRE-REQUISITE CHECKS
+# ========================================
+
+# Return if bpm is already available.
+if command -v bpm &> /dev/null; then
+    echo "bpm is already installed. Nothing to do."
+    exit 0
+fi
+
+# Download the bpm script, if it's not installed.
+download
+
+# Check if it has been downloaded successfully as an executable file.
+if [ -f "${__BPM_PATH}" ] && \
+    [ -x "${__BPM_PATH}" ] && \
+    file "${__BPM_PATH}" | grep -q "executable"
+then
+    echo "Successfully downloaded bpm."
+else 
+    die "An unknown error occurred."
+fi
+
+# Install packages if downloaded successfully and the flag is set.
+if [[ ${__INSTALL_PACKAGES} == "true" ]]; then
+    echo "Installing missing packages to './bpm-modules/'."
+    bpm install
+fi

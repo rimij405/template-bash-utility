@@ -19,8 +19,11 @@ You'll want to change the details that are present in the following files after 
 
 <!-- This section should provide an overview of your project's license. -->
 
-This template is licensed under the [MIT No Attribution License]. Projects created using this template *are not required* to use this license and may be published under a license of the derivative creator's choice.
+The code in this template, unless otherwise specified, is licensed under the [MIT No Attribution License]. Projects created using this template *are not required* to use this license and may be published under a license of the derivative creator's choice.
+
+Helper scripts in the `lib/` directory are released under the [MIT License] and require attribution if you wish to use them in your code.
 
 <!-- Links -->
 
+[MIT License]: https://spdx.org/licenses/MIT.html
 [MIT No Attribution License]: https://spdx.org/licenses/MIT-0.html

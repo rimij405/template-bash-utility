@@ -23,6 +23,9 @@ var/
 
 # ===== FILES
 
+# IDE Configuration
+.markdownlint.*
+
 # Environment Variables
 .env
 .env.test

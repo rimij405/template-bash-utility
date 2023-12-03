@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased] - 2023-12-03
 
-<!-- ### Added -->
-
 This section will be updated as pre-release changes are introduced.
 
-<!-- ### Changed -->
+### Added
+
+- configuration for bash dependencies (`bpm.ini`)
+- ansi bash script dependency
+
+### Changed
+
+- added `bpm-modules/` to ignored directories
 
 <!-- ### Deprecated -->
 

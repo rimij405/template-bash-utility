@@ -12,6 +12,7 @@ This section will be updated as pre-release changes are introduced.
 ### Added
 
 - `docs/` directory `README.md`
+- `bin/` directory `README.md`
 
 <!-- ### Changed -->
 

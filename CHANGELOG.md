@@ -9,7 +9,9 @@ and this project adheres to [Semantic Versioning].
 
 This section will be updated as pre-release changes are introduced.
 
-<!-- ### Added -->
+### Added
+
+- `docs/` directory `README.md`
 
 <!-- ### Changed -->
 

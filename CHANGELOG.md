@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning].
 - `CHANGELOG.md`
 - `CODEOWNERS`
 - List of contributors.
+- Code of conduct and guide for contributors.
 
 <!-- ### Changed -->
 

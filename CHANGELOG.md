@@ -9,10 +9,7 @@ and this project adheres to [Semantic Versioning].
 
 This section will be updated as pre-release changes are introduced.
 
-### Added
-
-- `docs/` directory `README.md`
-- `bin/` directory `README.md`
+<!-- ### Added -->
 
 <!-- ### Changed -->
 
@@ -23,6 +20,13 @@ This section will be updated as pre-release changes are introduced.
 <!-- ### Fixed -->
 
 <!-- ### Security -->
+
+## [0.0.4] - 2023-12-03
+
+### Added
+
+- `docs/` directory `README.md`
+- `bin/` directory `README.md`
 
 ## [0.0.3] - 2023-12-03
 
@@ -63,6 +67,7 @@ This section will be updated as pre-release changes are introduced.
 
 <!-- Versions -->
 [unreleased]: https://github.com/rimij405/template-bash-utility/compare/v0.0.1...HEAD
+[0.0.4]: https://github.com/rimij405/template-bash-utility/compare/v0.0.3..v0.0.4
 [0.0.3]: https://github.com/rimij405/template-bash-utility/compare/v0.0.2..v0.0.3
 [0.0.2]: https://github.com/rimij405/template-bash-utility/compare/v0.0.1..v0.0.2
 [0.0.1]: https://github.com/rimij405/template-bash-utility/releases/tag/v0.0.1
